@@ -1,0 +1,29 @@
+name: k6 Load Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  job_1:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+   
+      - name: Run local k6 test
+        uses: k6io/action@v0.1
+        with:
+          filename: first.js
+      
+     
+      - name: Upload html report for job 1
+        uses: actions/upload-artifact@v2
+        with:
+          name: summary
+          path: summary.html
+          retention-days: 2
+    
+  
